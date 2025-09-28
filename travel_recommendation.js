@@ -9,6 +9,7 @@ fetch('./travel_recommendation_api.json')
     if(Array.isArray(data)) {
         data.forEach((item, index) => {
             console.log(`Item ${index}:`, item);
+            const resultsList = resultsList.append(item);
         });
     } else {
         Object.keys(data).forEach(key => {
@@ -19,3 +20,8 @@ fetch('./travel_recommendation_api.json')
 .catch(error => {
     console.error("Error:", error);
 });
+
+function handleSearch(query) {
+    console.log("Search value:", query);
+    console.table(resultsList);
+}

@@ -19,8 +19,8 @@
         </div>
         <div id="searchArea">
             <form>
-                <input type="text" placeholder="Enter a destination or keyword">
-                <button id="searchBtn">Search</button>
+                <input id="searchField"type="text" placeholder="Enter a destination or keyword">
+                <button id="searchBtn" onclick="handleSearch(document.getElementById('searchField').value)">Search</button>
                 <button id="clearBtn">Clear</button>
             </form>
         </div>
@@ -33,5 +33,6 @@
 <section>
     <div id="searchResults"></div>
 </section>
+<script src="./travel_recommendation.js"></script>
 </body>
 </html>
