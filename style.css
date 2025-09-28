@@ -1,9 +1,20 @@
+body {
+    background-image: url('https://caribbeanislands.com/images/saint-vicent-the-grenadines.jpg');
+}
+
+h1 {
+    font-size: 64px;
+}
+
 #navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: rgb(49, 49, 49);
     color: white;
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #navbar a {
@@ -17,10 +28,20 @@
     border-radius: 5px;
 }
 
+#siteNav {
+    align-content: center;
+}
+
 #searchArea {
     background-color: white;
     border-radius: 20px;
     align-content: center;
     padding-left: 10px;
     padding-right: 10px; 
+}
+
+.pageContents {
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    width: 50%;
 }
