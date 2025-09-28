@@ -1,4 +1,26 @@
 #navbar {
-    background-color: darkslategrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(49, 49, 49);
     color: white;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+#navbar button {
+    color: white;
+    background-color: darkslategrey;
+    border-radius: 5px;
+}
+
+#searchArea {
+    background-color: white;
+    border-radius: 20px;
+    align-content: center;
+    padding-left: 10px;
+    padding-right: 10px; 
 }
