@@ -34,7 +34,7 @@ h1 {
 
 #searchArea {
     background-color: white;
-    border-radius: 20px;
+    border-radius: 50px;
     align-content: center;
     padding-left: 10px;
     padding-right: 10px; 
@@ -44,4 +44,48 @@ h1 {
     color: white;
     font-family: "Montserrat", sans-serif;
     width: 50%;
+}
+
+#aboutUsText {
+    width: 75%;
+}
+
+#team {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#teamCardSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.teamCard {
+    background-color: rgba(00,00,00,0.3);
+    margin: 10px;
+    padding:10px;
+}
+
+.teamCard button {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+}
+
+#contactContent {
+    display: flex;
+    flex-direction: row;
+}
+
+#contactForm {
+    display: block;
+}
+
+#contactForm button {
+    width: 100%;
+    background-color: teal;
 }
