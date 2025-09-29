@@ -1,4 +1,4 @@
-let travelData = []; // store data globally
+let travelData = {}; // store data globally
 
 // Fetch JSON data
 fetch('./travel_recommendation_api.json')
@@ -9,7 +9,7 @@ fetch('./travel_recommendation_api.json')
     return response.json();
   })
   .then(data => {
-    travelData = data; // save for later use in handleSearch
+    travelData = data;
     console.log("Data loaded:", travelData);
   })
   .catch(error => {
@@ -17,39 +17,71 @@ fetch('./travel_recommendation_api.json')
   });
 
 function handleSearch(query) {
-  // normalize query (case-insensitive)
   const searchTerm = query.trim().toLowerCase();
+  const resultsDiv = document.getElementById("searchResults");
+  resultsDiv.innerHTML = ""; // clear old results
 
-  // find substring matches
   let matches = [];
 
-  if (Array.isArray(travelData)) {
-    matches = travelData.filter(item => 
-      JSON.stringify(item).toLowerCase().includes(searchTerm)
-    );
-  } else if (typeof travelData === "object") {
-    // if JSON is object with keys
-    Object.keys(travelData).forEach(key => {
-      if (key.toLowerCase().includes(searchTerm) || 
-          JSON.stringify(travelData[key]).toLowerCase().includes(searchTerm)) {
-        matches.push({ key, value: travelData[key] });
+  // --- Search in countries -> cities ---
+  if (travelData.countries) {
+    travelData.countries.forEach(country => {
+      country.cities.forEach(city => {
+        if (
+          city.name.toLowerCase().includes(searchTerm) ||
+          city.description.toLowerCase().includes(searchTerm)
+        ) {
+          matches.push(city);
+        }
+      });
+    });
+  }
+
+  // --- Search in temples ---
+  if (travelData.temples) {
+    travelData.temples.forEach(temple => {
+      if (
+        temple.name.toLowerCase().includes(searchTerm) ||
+        temple.description.toLowerCase().includes(searchTerm)
+      ) {
+        matches.push(temple);
       }
     });
   }
 
-  // display results in the div
-  const resultsDiv = document.getElementById("searchResults");
-  resultsDiv.innerHTML = ""; // clear old results
-
-  if (matches.length === 0) {
-    resultsDiv.innerHTML = "<p>No matches found.</p>";
-  } else {
-    matches.forEach(match => {
-      const p = document.createElement("p");
-      p.textContent = typeof match === "object" ? JSON.stringify(match) : match;
-      resultsDiv.appendChild(p);
+  // --- Search in beaches ---
+  if (travelData.beaches) {
+    travelData.beaches.forEach(beach => {
+      if (
+        beach.name.toLowerCase().includes(searchTerm) ||
+        beach.description.toLowerCase().includes(searchTerm)
+      ) {
+        matches.push(beach);
+      }
     });
   }
+
+  // --- Display results ---
+  if (matches.length === 0) {
+    resultsDiv.innerHTML = "<p>No matches found.</p>";
+    return;
+  }
+
+  matches.forEach(match => {
+    const card = document.createElement("div");
+    card.classList.add("result-card");
+
+    card.innerHTML = `
+      <img src="${match.imageUrl}" alt="${match.name}">
+      <div class="result-content">
+        <h3>${match.name}</h3>
+        <p>${match.description}</p>
+        <button class="visit-btn">Visit</button>
+      </div>
+    `;
+
+    resultsDiv.appendChild(card);
+  });
 }
 
 
